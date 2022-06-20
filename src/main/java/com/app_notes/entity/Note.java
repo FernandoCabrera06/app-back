@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Note {
+public class Note implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "id_note")
@@ -25,7 +26,7 @@ public class Note {
 
     //Relationship
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "note_category",
             joinColumns = @JoinColumn(name = "id_note"),

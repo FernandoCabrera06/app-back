@@ -12,7 +12,10 @@ import java.util.Optional;
 public class NoteController {
     @Autowired
     NoteService noteService;
-
+    @GetMapping({"/","/login"})
+    public String index() {
+        return "index";
+    }
     @GetMapping("/notesActive")
     public List<Note> getNotesActive() {
         return noteService.getNotesActive();
